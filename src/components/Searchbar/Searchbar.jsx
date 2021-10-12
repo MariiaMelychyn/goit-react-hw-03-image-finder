@@ -1,23 +1,23 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 
 class Searchbar extends Component {
-statt = {
+  state = {
     requestKey: '',
-}
+  }
 
-static propTypes ={
-    onSubmit: this.propTypes.func.isRequired,
-};
+  static propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+  };
 
-handleRequestChange = event => {
-    this.setState({requestKey: event.currentTarget.value.toLowerCase()});
-};
+  handleRequestChange = event => {
+    this.setState({ requestKey: event.currentTarget.value.toLowerCase() });
+  };
 
-handleSubmit = event => {
+  handleSubmit = event => {
     event.preventDefault();
 
     if (this.state.requestKey.trim() === '') {
@@ -29,26 +29,26 @@ handleSubmit = event => {
     this.setState({ requestKey: '' });
   };
 
-
-    render(){
-        return(
-  <header className="Searchbar">
-  <form className="SearchForm">
-    <button type="submit" className="SearchForm-button">
-      <span className="SearchForm-button-label">Search</span>
-    </button>
-
-    <input
-      className="SearchForm-input"
-      type="text"
-      autocomplete="off"
-      autofocus
-      placeholder="Search images and photos"
-    />
-  </form>
-</header>
-        )
-    }
+  render() {
+    return (
+      <header className="Searchbar">
+        <form className="SearchForm" onSubmit={this.handleSubmit}>
+          <button type="submit" className="SearchForm-button">
+            <span className="SearchForm-button-label">Search</span>
+          </button>
+           <input
+            className="SearchForm-input"
+            type="text"
+            autoComplete="off"
+            autoFocus
+            placeholder="Search images and photos"
+            value={this.state.requestKey}
+            onChange={this.handleRequestChange}
+            />
+        </form>
+      </header>
+    )
+  }
 }
 
 export default Searchbar;
